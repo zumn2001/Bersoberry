@@ -2,12 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Category;
+use App\Models\Unit;
 use Illuminate\Http\Request;
-use App\Http\Controllers\BaseController;
-use App\Http\Resources\CategoryResource;
+use App\Http\Resources\UnitResource;
 
-class CategoryController extends BaseController
+class UnitController extends BaseController
 {
     /**
      * Display a listing of the resource.
@@ -16,7 +15,7 @@ class CategoryController extends BaseController
      */
     public function index()
     {
-        return $this->response('all categories' , CategoryResource::collection(Category::all()));
+        return $this->response('All Unit' , UnitResource::collection(Unit::all()));
     }
 
     /**
@@ -26,7 +25,7 @@ class CategoryController extends BaseController
      */
     public function create()
     {
-        
+        //
     }
 
     /**
@@ -37,33 +36,31 @@ class CategoryController extends BaseController
      */
     public function store(Request $req)
     {
-        $category = new Category();
-        $category->name = $req->name;
-        $category->save();
-        return $this->response('all categories' , new CategoryResource($category));
-
+        $unit = new Unit();
+        $unit->name = $req->name;
+        $unit->save();
+        return $this->response('All Units' , new UnitResource($unit));
     }
-    
+
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Category  $category
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($category)
+    public function show($unit)
     {
-        $category = Category::where('id' , $category)->first();
-        return $this->response('all categories' , new CategoryResource($category));
-
+        $unit = Unit::where('id' , $unit)->first();
+        return $this->response('Tag' , new UnitResource($unit));
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Category  $category
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(Category $category)
+    public function edit($id)
     {
         //
     }
@@ -72,33 +69,30 @@ class CategoryController extends BaseController
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Category  $category
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $req,$category)
+    public function update(Request $req, $unit)
     {
-
-        $category = Category::where('id' , $category)->first();
-        $category->name = $req->name;
-        $category->save();
-        return $this->response('Update Category!' , new CategoryResource($category));
-
+        $unit = Unit::where('id' , $unit)->first();
+        $unit->name = $req->name;
+        $unit->save();
+        return $this->response('Update Category!' , new UnitResource($unit));
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Category  $category
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($category)
+    public function destroy($unit)
     {
-        $category = Category::where('id' , $category)->first();
-        $category->delete();
+        $unit = Unit::where('id' , $unit)->first();
+        $unit->delete();
         return response()->json([
             'condition'=> true,
             'message' => "Delete!",
         ],200);
-
     }
 }
