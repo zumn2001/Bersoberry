@@ -7,6 +7,7 @@ use App\Models\Unit;
 use App\Models\Product;
 use Illuminate\Http\Request;
 use App\Http\Resources\ProductResource;
+use GuzzleHttp\Handler\Proxy;
 
 class ProductContoller extends BaseController
 {
@@ -56,9 +57,10 @@ class ProductContoller extends BaseController
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($product)
     {
-        //
+        $product = Product::where('id' , $product)->first();
+        return $this->response('all Products' , new ProductResource($product));
     }
 
     /**
@@ -79,9 +81,17 @@ class ProductContoller extends BaseController
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $req, $product)
     {
-        //
+        $product = Product::where('id' , $product)->first();
+        $product->name = $req->name;
+        $product->price = $req->price;
+        $product->discount = $req->discount;
+        $product->category_id = $req->category_id;
+        $product->tag_id = $req->tag_id;
+        $product->unit_id = $req->unit_id;
+        $product->update();
+        return $this->response('All Products' , new ProductResource($product));
     }
 
     /**
@@ -90,8 +100,13 @@ class ProductContoller extends BaseController
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy($product)
     {
-        //
+        $product = Product::where('id' , $product)->first();
+        $product->delete();
+        return response()->json([
+            'condition'=> true,
+            'message' => "Delete!",
+        ],200);
     }
 }
