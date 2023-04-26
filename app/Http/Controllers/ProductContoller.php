@@ -44,6 +44,8 @@ class ProductContoller extends BaseController
         $product->name = $req->name;
         $product->price = $req->price;
         $product->discount = $req->discount;
+        $product->stock = $req->stock;
+        $product->brand = $req->brand;
         $product->category_id = $req->category_id;
         $product->tag_id = $req->tag_id;
         $product->unit_id = $req->unit_id;
@@ -87,6 +89,8 @@ class ProductContoller extends BaseController
         $product->name = $req->name;
         $product->price = $req->price;
         $product->discount = $req->discount;
+        $product->stock = $req->stock;
+        $product->brand = $req->brand;
         $product->category_id = $req->category_id;
         $product->tag_id = $req->tag_id;
         $product->unit_id = $req->unit_id;

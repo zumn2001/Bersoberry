@@ -3,8 +3,10 @@
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ProductContoller;
 use App\Http\Controllers\ProductDescriptionController;
+use App\Http\Controllers\ProductImageController;
 use App\Http\Controllers\TagController;
 use App\Http\Controllers\UnitController;
+use App\Models\ProductImage;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -27,3 +29,4 @@ Route::apiResource('tags',TagController::class);
 Route::apiResource('units',UnitController::class);
 Route::apiResource('products',ProductContoller::class);
 Route::apiResource('productdescriptions',ProductDescriptionController::class);
+Route::apiResource('productimages',ProductImageController::class);
